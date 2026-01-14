@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FunKustoms | Custom Print-on-Demand Products</title>
+    <meta name="description" content="Design and order custom t-shirts, hoodies, phone cases, mugs & stickers. Express your unique style with FunKustoms print-on-demand." />
+    <meta name="author" content="FunKustoms" />
+    <meta name="keywords" content="custom print, print on demand, custom t-shirts, custom hoodies, personalized products" />
+    <link rel="canonical" href="https://funkustoms.com" />
+
+    <meta property="og:title" content="FunKustoms | Customize Your Style" />
+    <meta property="og:description" content="Create unique custom products that express who you are. T-shirts, hoodies, phone cases & more." />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@FunKustoms" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #ffffff; backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#home">
+                <img src="assets/logo.png" alt="FunKustoms" style="height: 2rem; width: auto;">
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#customize">Customize</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bulk-orders.html">Bulk Orders</a>
+                    </li>
+                </ul>
+
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <button class="btn btn-sm user-btn" title="User account" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-user" style="font-size: 1.25rem; color: var(--fg);"></i>
+                    </button>
+                    <button class="btn btn-sm cart-btn position-relative" title="Shopping cart" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-shopping-bag" style="font-size: 1.25rem; color: var(--fg);"></i>
+                        <span class="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="scrollToSection('customize')">Start Customizing</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="container py-5">
+                <div class="row align-items-center" style="min-height: calc(100vh - 5rem);">
+                    <!-- Text Content -->
+                    <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0 order-2 order-lg-1">
+                        <div class="hero-badge d-inline-block mb-3">
+                            <i class="fas fa-sparkles"></i>
+                            <span>Print-on-Demand Made Fun</span>
+                        </div>
+
+                        <h1 class="hero-title mb-4">
+                            Customize Your
+                            <span class="text-gradient-primary">Style</span>
+                        </h1>
+
+                        <p class="hero-subtitle mb-4">
+                            Create unique, custom products that express who you are. 
+                            T-shirts, hoodies, phone cases & more — all printed just for you.
+                        </p>
+
+                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start mb-4">
+                            <button class="btn btn-hero" onclick="scrollToSection('customize')">
+                                Start Customizing
+                                <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                            <button class="btn btn-outline-primary btn-lg">
+                                Browse Products
+                            </button>
+                        </div>
+
+                        <!-- Trust Badges -->
+                        <div class="hero-trust">
+                            <div class="trust-item">
+                                <span class="trust-dot"></span>
+                                <span>Free Shipping on orders above 500Rs</span>
+                            </div>
+                            <div class="trust-item">
+                                <span class="trust-dot"></span>
+                                <span>Premium Quality</span>
+                            </div>
+                            <div class="trust-item">
+                                <span class="trust-dot"></span>
+                                <span>Fast Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mascot Image -->
+                    <div class="col-lg-6 text-center order-1 order-lg-2 mb-4 mb-lg-0">
+                        <div class="mascot-glow"></div>
+                        <div class="mascot-container" data-mascot="chroma">
+                            <img src="assets/chameleon-male.png" alt="FunKustoms Mascot" class="mascot-image animate-float img-fluid">
+                            <div class="mascot-tooltip">Design it<br>your way!<br>I'm Chroma.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Categories -->
+        <section class="categories-section py-5" id="categories">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Choose Your Canvas</h2>
+                    <p class="section-subtitle">
+                        Pick a product, upload your design, and we'll bring it to life with premium quality printing.
+                    </p>
+                </div>
+
+                <div class="row g-3 g-md-4">
+                    <div class="col-6 col-md-4 col-lg-2-5">
+                        <a href="#" class="category-card text-decoration-none">
+                            <div class="category-image bg-light d-flex align-items-center justify-content-center rounded-4 mb-3" style="aspect-ratio: 1;">
+                                <img src="assets/product-tshirt.png" alt="T-Shirts" class="img-fluid" style="max-height: 150px;">
+                            </div>
+                            <div class="text-center">
+                                <h5 class="mb-1">T-Shirts</h5>
+                                <p class="small text-muted">Premium cotton tees</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-2-5">
+                        <a href="#" class="category-card text-decoration-none">
+                            <div class="category-image bg-light d-flex align-items-center justify-content-center rounded-4 mb-3" style="aspect-ratio: 1;">
+                                <img src="assets/product-hoodie.png" alt="Hoodies" class="img-fluid" style="max-height: 150px;">
+                            </div>
+                            <div class="text-center">
+                                <h5 class="mb-1">Hoodies</h5>
+                                <p class="small text-muted">Cozy streetwear</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-2-5">
+                        <a href="#" class="category-card text-decoration-none">
+                            <div class="category-image bg-light d-flex align-items-center justify-content-center rounded-4 mb-3" style="aspect-ratio: 1;">
+                                <img src="assets/product-phonecase.png" alt="Phone Cases" class="img-fluid" style="max-height: 150px;">
+                            </div>
+                            <div class="text-center">
+                                <h5 class="mb-1">Phone Cases</h5>
+                                <p class="small text-muted">Protect in style</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-2-5">
+                        <a href="#" class="category-card text-decoration-none">
+                            <div class="category-image bg-light d-flex align-items-center justify-content-center rounded-4 mb-3" style="aspect-ratio: 1;">
+                                <img src="assets/product-mug.png" alt="Mugs" class="img-fluid" style="max-height: 150px;">
+                            </div>
+                            <div class="text-center">
+                                <h5 class="mb-1">Mugs</h5>
+                                <p class="small text-muted">Morning vibes</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-2-5">
+                        <a href="#" class="category-card text-decoration-none">
+                            <div class="category-image bg-light d-flex align-items-center justify-content-center rounded-4 mb-3" style="aspect-ratio: 1;">
+                                <img src="assets/product-stickers.png" alt="Stickers" class="img-fluid" style="max-height: 150px;">
+                            </div>
+                            <div class="text-center">
+                                <h5 class="mb-1">Stickers</h5>
+                                <p class="small text-muted">Express yourself</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works-section py-5" style="background-color: var(--muted);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-subtitle">
+                        From idea to inbox in three simple steps. No minimum orders, no hassle.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="step-card text-center p-4 h-100">
+                            <div class="step-number">01</div>
+                            <div class="step-icon upload-icon mx-auto mb-3">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h4 class="mb-3">Upload Your Design</h4>
+                            <p class="text-muted">Drop your artwork or use our design tools to create something unique.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="step-card text-center p-4 h-100">
+                            <div class="step-number">02</div>
+                            <div class="step-icon preview-icon mx-auto mb-3">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h4 class="mb-3">Preview & Perfect</h4>
+                            <p class="text-muted">See your design on the product in real-time. Adjust until it's just right.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="step-card text-center p-4 h-100">
+                            <div class="step-number">03</div>
+                            <div class="step-icon truck-icon mx-auto mb-3">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h4 class="mb-3">We Print & Ship</h4>
+                            <p class="text-muted">Premium quality printing and fast delivery straight to your door.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products-section py-5" id="customize">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center mb-5 flex-column flex-md-row gap-3">
+                    <div>
+                        <h2 class="section-title">Featured Products</h2>
+                        <p class="section-subtitle">
+                            Popular picks loved by our community. Ready to customize or order as-is.
+                        </p>
+                    </div>
+                    <button class="btn btn-outline-primary">View All Products</button>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Product 1 -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="product-card card border h-100 position-relative">
+                            <div class="product-image-container bg-light d-flex align-items-center justify-content-center position-relative" style="aspect-ratio: 1;">
+                                <img src="assets/product-tshirt.png" alt="Classic White Tee" class="product-image img-fluid" style="max-height: 200px;">
+                                <span class="badge bg-primary position-absolute top-0 start-0 m-3">Bestseller</span>
+                                <button class="product-action-btn position-absolute top-0 end-0 m-3 rounded-circle bg-white border-0 p-2" title="Add to favorites">
+                                    <i class="fas fa-heart" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Classic White Tee</h5>
+                                <div class="mb-3">
+                                    <span class="h5 text-primary">₹1,299</span>
+                                    <span class="text-muted text-decoration-line-through">₹1,799</span>
+                                </div>
+                                <button class="btn btn-primary mt-auto add-to-cart">
+                                    <i class="fas fa-shopping-bag me-2"></i>Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="product-card card border h-100 position-relative">
+                            <div class="product-image-container bg-light d-flex align-items-center justify-content-center position-relative" style="aspect-ratio: 1;">
+                                <img src="assets/product-hoodie.png" alt="Urban Black Hoodie" class="product-image img-fluid" style="max-height: 200px;">
+                                <span class="badge bg-warning position-absolute top-0 start-0 m-3">New</span>
+                                <button class="product-action-btn position-absolute top-0 end-0 m-3 rounded-circle bg-white border-0 p-2" title="Add to favorites">
+                                    <i class="fas fa-heart" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Urban Black Hoodie</h5>
+                                <div class="mb-3">
+                                    <span class="h5 text-primary">₹2,499</span>
+                                </div>
+                                <button class="btn btn-primary mt-auto add-to-cart">
+                                    <i class="fas fa-shopping-bag me-2"></i>Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="product-card card border h-100 position-relative">
+                            <div class="product-image-container bg-light d-flex align-items-center justify-content-center position-relative" style="aspect-ratio: 1;">
+                                <img src="assets/product-phonecase.png" alt="Custom Phone Case" class="product-image img-fluid" style="max-height: 200px;">
+                                <span class="badge bg-info position-absolute top-0 start-0 m-3">Popular</span>
+                                <button class="product-action-btn position-absolute top-0 end-0 m-3 rounded-circle bg-white border-0 p-2" title="Add to favorites">
+                                    <i class="fas fa-heart" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Custom Phone Case</h5>
+                                <div class="mb-3">
+                                    <span class="h5 text-primary">₹999</span>
+                                    <span class="text-muted text-decoration-line-through">₹1,199</span>
+                                </div>
+                                <button class="btn btn-primary mt-auto add-to-cart">
+                                    <i class="fas fa-shopping-bag me-2"></i>Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="product-card card border h-100 position-relative">
+                            <div class="product-image-container bg-light d-flex align-items-center justify-content-center position-relative" style="aspect-ratio: 1;">
+                                <img src="assets/product-mug.png" alt="Morning Vibe Mug" class="product-image img-fluid" style="max-height: 200px;">
+                                <button class="product-action-btn position-absolute top-0 end-0 m-3 rounded-circle bg-white border-0 p-2" title="Add to favorites">
+                                    <i class="fas fa-heart" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Morning Vibe Mug</h5>
+                                <div class="mb-3">
+                                    <span class="h5 text-primary">₹799</span>
+                                </div>
+                                <button class="btn btn-primary mt-auto add-to-cart">
+                                    <i class="fas fa-shopping-bag me-2"></i>Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Values -->
+        <section class="brand-values-section py-5" id="values">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0 order-2 order-lg-1">
+                        <h2 class="section-title mb-4">
+                            Why Choose
+                            <span class="text-gradient-accent"> FunKustoms?</span>
+                        </h2>
+                        <p class="section-subtitle mb-4">
+                            We're not just another print shop. We're your creative partners, 
+                            dedicated to bringing your wildest ideas to life with style and quality.
+                        </p>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="value-item d-flex gap-3 p-3">
+                                    <div class="value-icon lightning rounded-2">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Fast Production</h5>
+                                        <p class="text-muted small mb-0">Most orders printed within 24 hours</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="value-item d-flex gap-3 p-3">
+                                    <div class="value-icon leaf rounded-2">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Eco-Friendly</h5>
+                                        <p class="text-muted small mb-0">Sustainable inks and materials</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="value-item d-flex gap-3 p-3">
+                                    <div class="value-icon shield rounded-2">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Quality Guarantee</h5>
+                                        <p class="text-muted small mb-0">Love it or we'll make it right</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="value-item d-flex gap-3 p-3">
+                                    <div class="value-icon heart rounded-2">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Made with Love</h5>
+                                        <p class="text-muted small mb-0">Every product crafted with care</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 text-center order-1 order-lg-2 mb-4 mb-lg-0">
+                        <div class="values-glow"></div>
+                        <div class="mascot-container" data-mascot="iris">
+                            <img src="assets/chameleon-female.png" alt="FunKustoms Creative Mascot" class="mascot-image animate-float-gentle img-fluid" style="max-width: 300px;">
+                            <div class="mascot-tooltip">I'm Iris.<br>Let's explore<br>styles that<br>feel like you.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats & Testimonials Section -->
+        <section class="py-5" style="background-color: #ffffff;">
+            <div class="container py-5">
+                <!-- Stats Section -->
+                <div class="row g-4 mb-5 text-center">
+                    <div class="col-6 col-md-3">
+                        <div>
+                            <h3 style="font-size: 2.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;">10K+</h3>
+                            <p style="color: var(--muted-fg); font-size: 1rem;">Designs Printed</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div>
+                            <h3 style="font-size: 2.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;">500+</h3>
+                            <p style="color: var(--muted-fg); font-size: 1rem;">Happy Creators</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div>
+                            <h3 style="font-size: 2.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;">99%</h3>
+                            <p style="color: var(--muted-fg); font-size: 1rem;">Satisfaction Rate</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div>
+                            <h3 style="font-size: 2.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;">48hr</h3>
+                            <p style="color: var(--muted-fg); font-size: 1rem;">Avg. Turnaround</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials Section -->
+                <div class="py-5">
+                    <div class="text-center mb-5">
+                        <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 1rem; color: var(--fg);">
+                            Trusted by Creators & Brands
+                        </h2>
+                        <p style="font-size: 1rem; color: var(--muted-fg);">See what our customers have to say</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Testimonial 1 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-0 p-4 h-100" style="background-color: #f9f8f6; border-radius: 1rem; box-shadow: var(--shadow-sm);">
+                                <div class="mb-3" style="color: var(--accent);">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p style="color: var(--muted-fg); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                                    "FunKustoms has been a game-changer for my small clothing brand. The quality is consistent and the pricing is transparent."
+                                </p>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: var(--accent); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                        P
+                                    </div>
+                                    <div>
+                                        <h6 style="color: var(--fg); font-weight: 600; margin-bottom: 0.25rem;">Priya Sharma</h6>
+                                        <p style="color: var(--muted-fg); font-size: 0.85rem; margin: 0;">Founder, DesignStudio</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-0 p-4 h-100" style="background-color: #f9f8f6; border-radius: 1rem; box-shadow: var(--shadow-sm);">
+                                <div class="mb-3" style="color: var(--accent);">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p style="color: var(--muted-fg); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                                    "Ordered 500 t-shirts for a corporate event. The bulk pricing was great and delivery was on time. Will definitely use again!"
+                                </p>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: var(--accent); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                        R
+                                    </div>
+                                    <div>
+                                        <h6 style="color: var(--fg); font-weight: 600; margin-bottom: 0.25rem;">Rahul Mehta</h6>
+                                        <p style="color: var(--muted-fg); font-size: 0.85rem; margin: 0;">Event Coordinator</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-0 p-4 h-100" style="background-color: #f9f8f6; border-radius: 1rem; box-shadow: var(--shadow-sm);">
+                                <div class="mb-3" style="color: var(--accent);">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p style="color: var(--muted-fg); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                                    "I love how easy it is to see my designs on products before ordering. The live preview feature is incredibly helpful."
+                                </p>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: var(--accent); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                        A
+                                    </div>
+                                    <div>
+                                        <h6 style="color: var(--fg); font-weight: 600; margin-bottom: 0.25rem;">Ananya Iyer</h6>
+                                        <p style="color: var(--muted-fg); font-size: 0.85rem; margin: 0;">Independent Artist</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section py-5">
+            <div class="container">
+                <div class="cta-box rounded-4 py-5 px-4 px-md-5 text-center position-relative overflow-hidden" style="background: linear-gradient(135deg, var(--primary) 0%, #3557c9 100%);">
+                    <div class="cta-decorative"></div>
+                    <div class="cta-content position-relative z-1">
+                        <div class="cta-badge d-inline-block mb-3">
+                            <i class="fas fa-sparkles me-2"></i>
+                            <span>Ready to Create?</span>
+                        </div>
+
+                        <h2 class="cta-title text-white mb-4">Your Design, Your Way</h2>
+
+                        <p class="cta-subtitle text-white mb-4">
+                            Join thousands of creators who've brought their ideas to life. 
+                            Start your first custom product today — it's easier than you think.
+                        </p>
+
+                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                            <button class="btn btn-light btn-lg" onclick="scrollToSection('customize')">
+                                Start Customizing Now
+                                <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                            <button class="btn btn-outline-light btn-lg">
+                                Browse Gallery
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5" style="background-color: var(--fg); color: rgba(248, 237, 213, 0.8);">
+        <div class="container mb-5">
+            <div class="row g-4">
+                <!-- Brand -->
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="d-inline-block mb-3">
+                        <img src="assets/logo.png" alt="FunKustoms" style="height: 2rem; width: auto; filter: brightness(0) invert(1);">
+                    </a>
+                    <p style="font-size: 0.95rem; max-width: 250px; color: rgba(248, 237, 213, 0.6);">
+                        Custom print-on-demand products that let you express your unique style.
+                    </p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="btn btn-sm btn-link text-white" style="text-decoration: none;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-link text-white" style="text-decoration: none;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-link text-white" style="text-decoration: none;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-link text-white" style="text-decoration: none;">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Shop -->
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h6 class="text-white mb-3" style="font-weight: 600;">Shop</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">T-Shirts</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Hoodies</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Phone Cases</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Mugs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Stickers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h6 class="text-white mb-3" style="font-weight: 600;">Company</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div class="col-md-6 col-lg-2">
+                    <h6 class="text-white mb-3" style="font-weight: 600;">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Shipping</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Returns</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" style="color: inherit;">Size Guide</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="text-white mb-3" style="font-weight: 600;">Stay Updated</h6>
+                    <p style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.6);">Get exclusive drops and offers delivered to your inbox.</p>
+                    <form class="d-flex gap-2" onsubmit="event.preventDefault(); showNotification('Thanks for subscribing!'); this.reset();">
+                        <input type="email" class="form-control form-control-sm" placeholder="Your email" required style="background-color: rgba(248, 237, 213, 0.1); border: 1px solid rgba(248, 237, 213, 0.2); color: white;">
+                        <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="border-top border-secondary" style="border-color: rgba(248, 237, 213, 0.1) !important; padding-top: 2rem;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <p style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.5);">© 2024 FunKustoms. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex gap-3 justify-content-md-end flex-wrap">
+                            <a href="#" style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.5); text-decoration: none;">Privacy Policy</a>
+                            <a href="#" style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.5); text-decoration: none;">Terms of Service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
