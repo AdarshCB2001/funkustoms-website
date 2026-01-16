@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop | FunKustoms | Custom Print-on-Demand Products</title>
+    <meta name="description" content="Browse and shop custom t-shirts, hoodies, phone cases, mugs, stickers and more from FunKustoms." />
+    <meta name="author" content="FunKustoms" />
+    <meta name="keywords" content="shop, buy custom products, t-shirts, hoodies, custom gifts" />
+    <link rel="canonical" href="https://funkustoms.com/shop" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            background-color: #f0f0f0;
+            height: 400px;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            animation: fade 1s;
+        }
+        .slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .slide-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .dot.active {
+            background-color: var(--accent);
+        }
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .trending-badge {
+            background: linear-gradient(90deg, var(--accent), #ff9500, var(--accent));
+            background-size: 200% 100%;
+            animation: gradientFlow 3s ease-in-out infinite;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .new-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+        @media (max-width: 768px) {
+            .slideshow-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #ffffff; backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo.png" alt="FunKustoms" style="height: 2rem; width: auto;">
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="customize.html">Customize</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bulk-orders.html">Bulk Orders</a>
+                    </li>
+                </ul>
+
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <button class="btn btn-sm user-btn" title="User account" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-user" style="font-size: 1.25rem; color: var(--fg);"></i>
+                    </button>
+                    <button class="btn btn-sm cart-btn position-relative" title="Shopping cart" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-shopping-bag" style="font-size: 1.25rem; color: var(--fg);"></i>
+                        <span class="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                    </button>
+                    <a href="customize.html" class="btn btn-primary btn-sm">Start Customizing</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 5rem;">
+        <!-- Banner Slideshow -->
+        <section class="slideshow-container">
+            <div class="slide active">
+                <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; text-align: center; width: 100%;">
+                    <i class="fas fa-image" style="font-size: 3rem; color: var(--accent);"></i>
+                    <h2 style="color: var(--fg); font-size: 1.5rem; margin: 0;">Summer Collection 2026</h2>
+                    <p style="color: var(--muted-fg); margin: 0;">Premium quality custom products</p>
+                </div>
+            </div>
+            <div class="slide">
+                <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; text-align: center; width: 100%;">
+                    <i class="fas fa-palette" style="font-size: 3rem; color: var(--primary);"></i>
+                    <h2 style="color: var(--fg); font-size: 1.5rem; margin: 0;">Create Your Own Design</h2>
+                    <p style="color: var(--muted-fg); margin: 0;">Fully customizable products</p>
+                </div>
+            </div>
+            <div class="slide">
+                <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; text-align: center; width: 100%;">
+                    <i class="fas fa-gift" style="font-size: 3rem; color: var(--secondary);"></i>
+                    <h2 style="color: var(--fg); font-size: 1.5rem; margin: 0;">Perfect Gifts for Everyone</h2>
+                    <p style="color: var(--muted-fg); margin: 0;">Express yourself with custom gifts</p>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section style="background-color: #ffffff; padding: 3rem 0; border-bottom: 1px solid var(--border);">
+            <div class="container">
+                <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; margin-bottom: 1rem; color: var(--fg);">
+                    Featured Products
+                </h2>
+                <p style="color: var(--muted-fg); font-size: 1rem; margin-bottom: 2rem;">
+                    Check out our latest and most popular products
+                </p>
+                <div class="featured-grid">
+                    <div style="background-color: #f9f8f6; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); padding: 1rem; text-align: center;">
+                        <div style="background-color: #f0f0f0; height: 150px; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem;">
+                            <i class="fas fa-image" style="font-size: 3rem; color: #ddd;"></i>
+                        </div>
+                        <h4 style="margin-top: 1rem; color: var(--fg); font-weight: 600;">Premium T-Shirt</h4>
+                        <p style="color: var(--accent); font-weight: 700; margin: 0.5rem 0;">₹472.50</p>
+                    </div>
+                    <div style="background-color: #f9f8f6; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); padding: 1rem; text-align: center;">
+                        <div style="background-color: #f0f0f0; height: 150px; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem;">
+                            <i class="fas fa-image" style="font-size: 3rem; color: #ddd;"></i>
+                        </div>
+                        <h4 style="margin-top: 1rem; color: var(--fg); font-weight: 600;">Custom Hoodie</h4>
+                        <p style="color: var(--accent); font-weight: 700; margin: 0.5rem 0;">₹899.00</p>
+                    </div>
+                    <div style="background-color: #f9f8f6; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); padding: 1rem; text-align: center;">
+                        <div style="background-color: #f0f0f0; height: 150px; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem;">
+                            <i class="fas fa-image" style="font-size: 3rem; color: #ddd;"></i>
+                        </div>
+                        <h4 style="margin-top: 1rem; color: var(--fg); font-weight: 600;">Phone Case</h4>
+                        <p style="color: var(--accent); font-weight: 700; margin: 0.5rem 0;">₹299.00</p>
+                    </div>
+                    <div style="background-color: #f9f8f6; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); padding: 1rem; text-align: center;">
+                        <div style="background-color: #f0f0f0; height: 150px; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem;">
+                            <i class="fas fa-image" style="font-size: 3rem; color: #ddd;"></i>
+                        </div>
+                        <h4 style="margin-top: 1rem; color: var(--fg); font-weight: 600;">Custom Mug</h4>
+                        <p style="color: var(--accent); font-weight: 700; margin: 0.5rem 0;">₹349.00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section style="background-color: #f9f8f6; padding: 3rem 0; border-bottom: 1px solid var(--border);">
+            <div class="container">
+                <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; margin-bottom: 2rem; color: var(--fg);">
+                    Shop by Category
+                </h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div style="background-color: #ffffff; border-radius: 1rem; padding: 2rem; text-align: center; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; padding: 3rem 1rem;" onclick="filterByCategory('t-shirts')">
+                            <i class="fas fa-shirt" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                            <h3 style="font-weight: 700; color: var(--fg); margin: 0.5rem 0;">T-Shirts</h3>
+                            <p style="color: var(--muted-fg); font-size: 0.9rem; margin: 0;">Premium quality tees</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div style="background-color: #ffffff; border-radius: 1rem; padding: 2rem; text-align: center; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; padding: 3rem 1rem;" onclick="filterByCategory('hoodies')">
+                            <i class="fas fa-swatchbook" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                            <h3 style="font-weight: 700; color: var(--fg); margin: 0.5rem 0;">Hoodies</h3>
+                            <p style="color: var(--muted-fg); font-size: 0.9rem; margin: 0;">Comfortable & stylish</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div style="background-color: #ffffff; border-radius: 1rem; padding: 2rem; text-align: center; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; padding: 3rem 1rem;" onclick="filterByCategory('stickers')">
+                            <i class="fas fa-sticker-mule" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+                            <h3 style="font-weight: 700; color: var(--fg); margin: 0.5rem 0;">Stickers</h3>
+                            <p style="color: var(--muted-fg); font-size: 0.9rem; margin: 0;">Vinyl sticker packs</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div style="background-color: #ffffff; border-radius: 1rem; padding: 2rem; text-align: center; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; padding: 3rem 1rem;" onclick="filterByCategory('mugs')">
+                            <i class="fas fa-mug-hot" style="font-size: 2.5rem; color: #e67e22; margin-bottom: 1rem;"></i>
+                            <h3 style="font-weight: 700; color: var(--fg); margin: 0.5rem 0;">Mugs</h3>
+                            <p style="color: var(--muted-fg); font-size: 0.9rem; margin: 0;">Custom ceramic mugs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shop Section with Filters -->
+        <section style="background-color: #f9f8f6; padding: 2rem 0; min-height: 80vh;">
+            <div class="container-fluid">
+                <div class="row g-0">
+                    <!-- Sidebar - Filters -->
+                    <div class="col-lg-2" style="background-color: #ffffff; border-right: 1px solid var(--border); padding: 2rem 1.5rem; min-height: 100vh;">
+                        <h3 style="font-weight: 700; color: var(--fg); margin-bottom: 1.5rem; font-size: 1.1rem;">
+                            <i class="fas fa-filter" style="color: var(--accent); margin-right: 0.5rem;"></i>Filters
+                        </h3>
+
+                        <!-- Color Filter -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="font-weight: 600; color: var(--fg); margin-bottom: 1rem; font-size: 0.95rem;">Color</h4>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <label style="display: flex; align-items: center; cursor: pointer; color: var(--muted-fg);">
+                                    <input type="radio" name="color" value="all" checked onclick="updateFilters()" style="margin-right: 0.5rem;">
+                                    All Colors
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; color: var(--muted-fg);">
+                                    <input type="radio" name="color" value="black" onclick="updateFilters()" style="margin-right: 0.5rem;">
+                                    Black
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; color: var(--muted-fg);">
+                                    <input type="radio" name="color" value="white" onclick="updateFilters()" style="margin-right: 0.5rem;">
+                                    White
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; color: var(--muted-fg);">
+                                    <input type="radio" name="color" value="navy" onclick="updateFilters()" style="margin-right: 0.5rem;">
+                                    Navy Blue
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; color: var(--muted-fg);">
+                                    <input type="radio" name="color" value="gray" onclick="updateFilters()" style="margin-right: 0.5rem;">
+                                    Gray
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Size Filter -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="font-weight: 600; color: var(--fg); margin-bottom: 1rem; font-size: 0.95rem;">Size</h4>
+                            <select id="sizeSelect" onchange="updateFilters()" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem; color: var(--fg); background-color: #ffffff;">
+                                <option value="">Select Size</option>
+                            </select>
+                            <div id="sizeList" style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem;"></div>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="font-weight: 600; color: var(--fg); margin-bottom: 1rem; font-size: 0.95rem;">Price Range</h4>
+                            <input type="range" id="priceRange" min="0" max="2000" value="2000" onchange="updateFilters()" style="width: 100%; cursor: pointer;">
+                            <p style="color: var(--accent); font-weight: 600; margin-top: 0.5rem; margin-bottom: 0;">₹0 - <span id="priceValue">₹2000</span></p>
+                        </div>
+
+                        <!-- Customizable Filter -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="font-weight: 600; color: var(--fg); margin-bottom: 1rem; font-size: 0.95rem;">Options</h4>
+                            <label style="display: flex; align-items: center; cursor: pointer; color: var(--muted-fg);">
+                                <input type="checkbox" id="customizable" onchange="updateFilters()" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                                <span>Customizable Only</span>
+                            </label>
+                        </div>
+
+                        <!-- Reset Filters -->
+                        <button onclick="resetFilters()" style="width: 100%; padding: 0.75rem; background-color: var(--border); color: var(--fg); border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                            Reset Filters
+                        </button>
+                    </div>
+
+                    <!-- Main Content - Products -->
+                    <div class="col-lg-10" style="padding: 2rem 1rem;">
+                        <!-- Category Header & Tabs -->
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; overflow-x: auto; padding-bottom: 1rem;">
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: nowrap;">
+                                <button data-category-btn="all" onclick="filterByCategory('all')" style="padding: 0.75rem 1.5rem; background-color: var(--accent); color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s;">All</button>
+                                <button data-category-btn="t-shirts" onclick="filterByCategory('t-shirts')" style="padding: 0.75rem 1.5rem; background-color: transparent; color: var(--fg); border: 1px solid var(--border); border-radius: 0.5rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s;">T-Shirts</button>
+                                <button data-category-btn="hoodies" onclick="filterByCategory('hoodies')" style="padding: 0.75rem 1.5rem; background-color: transparent; color: var(--fg); border: 1px solid var(--border); border-radius: 0.5rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s;">Hoodies</button>
+                                <button data-category-btn="stickers" onclick="filterByCategory('stickers')" style="padding: 0.75rem 1.5rem; background-color: transparent; color: var(--fg); border: 1px solid var(--border); border-radius: 0.5rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s;">Stickers</button>
+                                <button data-category-btn="mugs" onclick="filterByCategory('mugs')" style="padding: 0.75rem 1.5rem; background-color: transparent; color: var(--fg); border: 1px solid var(--border); border-radius: 0.5rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s;">Mugs</button>
+                            </div>
+                        </div>
+
+                        <!-- Products Grid -->
+                        <div class="row g-4" id="productsGrid">
+                            <!-- Products will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Pagination -->
+                        <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
+                            <button style="padding: 0.5rem 0.75rem; background-color: var(--border); color: var(--fg); border: none; border-radius: 0.4rem; cursor: pointer; font-weight: 600;"><i class="fas fa-chevron-left"></i></button>
+                            <button style="padding: 0.5rem 0.75rem; background-color: var(--accent); color: white; border: none; border-radius: 0.4rem; cursor: pointer; font-weight: 600;">1</button>
+                            <button style="padding: 0.5rem 0.75rem; background-color: var(--border); color: var(--fg); border: none; border-radius: 0.4rem; cursor: pointer; font-weight: 600;">2</button>
+                            <button style="padding: 0.5rem 0.75rem; background-color: var(--border); color: var(--fg); border: none; border-radius: 0.4rem; cursor: pointer; font-weight: 600;">3</button>
+                            <button style="padding: 0.5rem 0.75rem; background-color: var(--border); color: var(--fg); border: none; border-radius: 0.4rem; cursor: pointer; font-weight: 600;"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5" style="background-color: var(--fg); color: rgba(248, 237, 213, 0.8);">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <!-- Brand Section -->
+                <div class="col-md-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">FunKustoms</h5>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li><a href="about.html" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">About Us</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Blog</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Shop Section -->
+                <div class="col-md-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Shop</h5>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li><a href="shop.html?category=t-shirts" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">T-Shirts</a></li>
+                        <li><a href="shop.html?category=hoodies" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Hoodies</a></li>
+                        <li><a href="shop.html?category=phone-cases" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Phone Cases</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Section -->
+                <div class="col-md-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Support</h5>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">FAQ</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Shipping Info</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="col-md-6 col-lg-3">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Newsletter</h5>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control form-control-sm" placeholder="Your email" required style="background-color: rgba(248, 237, 213, 0.1); border: 1px solid rgba(248, 237, 213, 0.2); color: white;">
+                        <button type="submit" class="btn btn-sm btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <hr style="border-color: rgba(248, 237, 213, 0.2); margin: 2rem 0;">
+
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p style="margin: 0; font-size: 0.85rem;">
+                        © 2026 FunKustoms. All rights reserved. | 
+                        <a href="#" style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.5); text-decoration: none;">Privacy Policy</a> | 
+                        <a href="#" style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.5); text-decoration: none;">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-links d-flex justify-content-md-end gap-3">
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+
+    <script>
+        // Product Database
+        const products = [
+            { id: 1, name: 'Gojo White Subtle JJK Tee', category: 't-shirts', price: 472.50, color: 'white', size: 'XL', customizable: true, trending: true },
+            { id: 2, name: 'Anime Gojo Tee', category: 't-shirts', price: 399.00, color: 'black', size: 'L', customizable: true, trending: true },
+            { id: 3, name: 'Minimalist Design Tee', category: 't-shirts', price: 425.00, color: 'gray', size: 'M', customizable: true, trending: false },
+            { id: 4, name: 'Premium Blend Hoodie', category: 'hoodies', price: 899.00, color: 'navy', size: '2XL', customizable: true, trending: false },
+            { id: 5, name: 'Custom Phone Case', category: 'phone-cases', price: 299.00, color: 'black', size: 'Standard', customizable: true, trending: false },
+            { id: 6, name: 'Personalized Mug', category: 'mugs', price: 349.00, color: 'white', size: '11oz', customizable: true, trending: false, new: true },
+            { id: 7, name: 'Sticker Pack (10 pcs)', category: 'stickers', price: 149.00, color: 'multi', size: '2x2cm', customizable: false, trending: false },
+            { id: 8, name: 'Classic Graphic Tee', category: 't-shirts', price: 450.00, color: 'navy', size: 'M', customizable: true, trending: false },
+        ];
+
+        // Size options by category
+        const sizesByCategory = {
+            'all': [
+                { label: 'All Sizes', value: '' },
+                { label: 'XS', value: 'XS' },
+                { label: 'S', value: 'S' },
+                { label: 'M', value: 'M' },
+                { label: 'L', value: 'L' },
+                { label: 'XL', value: 'XL' },
+                { label: '2XL', value: '2XL' },
+                { label: '3XL', value: '3XL' },
+                { label: '4XL', value: '4XL' },
+                { label: '5XL', value: '5XL' },
+                { label: '6XL', value: '6XL' },
+            ],
+            't-shirts': [
+                { label: 'All Sizes', value: '' },
+                { label: 'XS', value: 'XS' },
+                { label: 'S', value: 'S' },
+                { label: 'M', value: 'M' },
+                { label: 'L', value: 'L' },
+                { label: 'XL', value: 'XL' },
+                { label: '2XL', value: '2XL' },
+                { label: '3XL', value: '3XL' },
+                { label: '4XL', value: '4XL' },
+                { label: '5XL', value: '5XL' },
+                { label: '6XL', value: '6XL' },
+            ],
+            'hoodies': [
+                { label: 'All Sizes', value: '' },
+                { label: 'XS', value: 'XS' },
+                { label: 'S', value: 'S' },
+                { label: 'M', value: 'M' },
+                { label: 'L', value: 'L' },
+                { label: 'XL', value: 'XL' },
+                { label: '2XL', value: '2XL' },
+                { label: '3XL', value: '3XL' },
+                { label: '4XL', value: '4XL' },
+                { label: '5XL', value: '5XL' },
+                { label: '6XL', value: '6XL' },
+            ],
+            'stickers': [
+                { label: 'All Sizes', value: '' },
+                { label: '1 x 1 cm', value: '1x1cm' },
+                { label: '2 x 2 cm', value: '2x2cm' },
+                { label: '4:5 Ratio', value: '4:5' },
+                { label: '3:4 Ratio', value: '3:4' },
+                { label: 'A6 (10x15cm)', value: 'A6' },
+                { label: 'A5 (14x21cm)', value: 'A5' },
+                { label: 'A4 (21x29cm)', value: 'A4' },
+                { label: 'A3 (29x42cm)', value: 'A3' },
+            ],
+            'mugs': [
+                { label: 'All Sizes', value: '' },
+                { label: '11 oz', value: '11oz' },
+                { label: '15 oz', value: '15oz' },
+                { label: '20 oz', value: '20oz' },
+            ],
+            'phone-cases': [
+                { label: 'All Sizes', value: '' },
+                { label: 'Standard', value: 'Standard' },
+                { label: 'iPhone 12', value: 'iPhone12' },
+                { label: 'iPhone 13', value: 'iPhone13' },
+                { label: 'Samsung S21', value: 'SamsungS21' },
+            ],
+        };
+
+        let currentCategory = 'all';
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSizeList();
+            renderProducts();
+            startSlideshow();
+        });
+
+        // Slideshow function
+        let slideIndex = 1;
+        function startSlideshow() {
+            setInterval(() => {
+                slideIndex++;
+                if (slideIndex > 3) slideIndex = 1;
+                showSlide(slideIndex);
+            }, 5000);
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        // Update size list based on category
+        function updateSizeList() {
+            const sizes = sizesByCategory[currentCategory] || sizesByCategory['all'];
+            const sizeList = document.getElementById('sizeList');
+            const sizeSelect = document.getElementById('sizeSelect');
+            
+            // Clear previous options
+            sizeSelect.innerHTML = '';
+            sizeList.innerHTML = '';
+            
+            // Populate dropdown
+            sizes.forEach(size => {
+                const option = document.createElement('option');
+                option.value = size.value;
+                option.textContent = size.label;
+                sizeSelect.appendChild(option);
+            });
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // Update button highlights
+            document.querySelectorAll('[data-category-btn]').forEach(btn => {
+                const btnCategory = btn.getAttribute('data-category-btn');
+                if (btnCategory === category) {
+                    btn.style.backgroundColor = 'var(--accent)';
+                    btn.style.color = 'white';
+                    btn.style.borderColor = 'var(--accent)';
+                } else {
+                    btn.style.backgroundColor = 'transparent';
+                    btn.style.color = 'var(--fg)';
+                    btn.style.borderColor = 'var(--border)';
+                }
+            });
+            
+            updateSizeList();
+            updateFilters();
+        }
+
+        // Update price value display
+        document.addEventListener('DOMContentLoaded', () => {
+            const priceRange = document.getElementById('priceRange');
+            if (priceRange) {
+                priceRange.addEventListener('input', (e) => {
+                    document.getElementById('priceValue').textContent = '₹' + e.target.value;
+                });
+            }
+        });
+
+        // Apply filters
+        function updateFilters() {
+            const selectedColor = document.querySelector('input[name="color"]:checked')?.value || 'all';
+            const selectedSize = document.getElementById('sizeSelect')?.value || '';
+            const maxPrice = parseInt(document.getElementById('priceRange')?.value || 2000);
+            const customizableOnly = document.getElementById('customizable')?.checked || false;
+
+            let filtered = products;
+
+            // Filter by category
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(p => p.category === currentCategory);
+            }
+
+            // Filter by color
+            if (selectedColor !== 'all') {
+                filtered = filtered.filter(p => p.color === selectedColor);
+            }
+
+            // Filter by size
+            if (selectedSize) {
+                filtered = filtered.filter(p => p.size === selectedSize || p.size.includes(selectedSize));
+            }
+
+            // Filter by price
+            filtered = filtered.filter(p => p.price <= maxPrice);
+
+            // Filter by customizable
+            if (customizableOnly) {
+                filtered = filtered.filter(p => p.customizable);
+            }
+
+            renderFilteredProducts(filtered);
+        }
+
+        // Render products
+        function renderProducts() {
+            renderFilteredProducts(products);
+        }
+
+        // Render filtered products
+        function renderFilteredProducts(items) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--muted-fg);">No products found</div>';
+                return;
+            }
+
+            items.forEach(product => {
+                const badge = product.trending ? 'Trending' : product.new ? 'New' : '';
+                const badgeClass = product.trending ? 'trending-badge' : 'new-badge';
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4 col-xl-3';
+                card.innerHTML = `
+                    <div style="background-color: #ffffff; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s ease; cursor: pointer; height: 100%;" onclick="window.location.href='product.html?id=${product.id}'">
+                        <div style="background-color: #f0f0f0; height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+                            <i class="fas fa-image" style="font-size: 3rem; color: #ddd;"></i>
+                            ${badge ? `<span class="${badgeClass}">${badge}</span>` : ''}
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--accent);">${product.category.toUpperCase()}</span>
+                            <h3 style="font-weight: 700; color: var(--fg); margin: 0.5rem 0; font-size: 1rem;">${product.name}</h3>
+                            <p style="color: var(--accent); font-weight: 700; font-size: 1rem; margin: 0.5rem 0;">₹${product.price.toFixed(2)}</p>
+                            <button style="width: 100%; background-color: var(--primary); color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onclick="event.stopPropagation();">View Details</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.querySelectorAll('input[name="color"]').forEach(el => el.checked = el.value === 'all');
+            document.getElementById('sizeSelect').value = '';
+            document.getElementById('priceRange').value = 2000;
+            document.getElementById('priceValue').textContent = '₹2000';
+            document.getElementById('customizable').checked = false;
+            renderProducts();
+        }
+    </script>
+</body>
+</html>

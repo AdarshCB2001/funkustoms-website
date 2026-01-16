@@ -1,45 +1,81 @@
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
     // ===== CURSOR ORB / FLASHLIGHT EFFECT =====
-    // Create the cursor orb element
-    const cursorOrb = document.createElement('div');
-    cursorOrb.className = 'cursor-orb';
-    document.body.appendChild(cursorOrb);
+    // Only show cursor orb on larger screens
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) {
+        // Create the cursor orb element
+        const cursorOrb = document.createElement('div');
+        cursorOrb.className = 'cursor-orb';
+        document.body.appendChild(cursorOrb);
 
-    // Orb position state
-    let orbX = 0;
-    let orbY = 0;
-    let mouseX = 0;
-    let mouseY = 0;
-    const lerpFactor = 0.15; // Smoothness factor (0.1-0.2 works well)
+        // Orb position state
+        let orbX = 0;
+        let orbY = 0;
+        let mouseX = 0;
+        let mouseY = 0;
+        const lerpFactor = 0.15; // Smoothness factor (0.1-0.2 works well)
 
-    // Linear Interpolation function
-    function lerp(start, end, t) {
-        return start + (end - start) * t;
+        // Linear Interpolation function
+        function lerp(start, end, t) {
+            return start + (end - start) * t;
+        }
+
+        // Track mouse position
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Animation loop using requestAnimationFrame
+        function animateOrb() {
+            // Smoothly interpolate orb position toward mouse
+            orbX = lerp(orbX, mouseX, lerpFactor);
+            orbY = lerp(orbY, mouseY, lerpFactor);
+
+            // Center the orb on the interpolated position (offset by half width/height)
+            cursorOrb.style.left = (orbX - 75) + 'px';
+            cursorOrb.style.top = (orbY - 75) + 'px';
+
+            requestAnimationFrame(animateOrb);
+        }
+
+        animateOrb();
     }
-
-    // Track mouse position
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Animation loop using requestAnimationFrame
-    function animateOrb() {
-        // Smoothly interpolate orb position toward mouse
-        orbX = lerp(orbX, mouseX, lerpFactor);
-        orbY = lerp(orbY, mouseY, lerpFactor);
-
-        // Center the orb on the interpolated position (offset by half width/height)
-        cursorOrb.style.left = (orbX - 75) + 'px';
-        cursorOrb.style.top = (orbY - 75) + 'px';
-
-        requestAnimationFrame(animateOrb);
-    }
-
-    animateOrb();
     // ===== END CURSOR ORB EFFECT =====
 
+    // Improved Mobile Menu Handling
+    const navbar = document.querySelector('.navbar');
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+    // Close mobile menu when a nav link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                navbarToggler.click(); // Toggle the menu closed
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            if (!navbar.contains(event.target)) {
+                navbarToggler.click();
+            }
+        }
+    });
+
+    // Re-check on resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navbarCollapse && navbarCollapse.classList.contains('show')) {
+            navbarToggler.click();
+        }
+    });
+    
     // Mascot Tooltip Functionality
     const mascotContainers = document.querySelectorAll('.mascot-container');
     console.log(`Found ${mascotContainers.length} mascot containers`);
@@ -70,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
-    const navLinks = document.querySelectorAll('.mobile-nav-link, .nav-link');
+    const allNavLinks = document.querySelectorAll('.mobile-nav-link, .nav-link');
 
     // Toggle mobile menu
     if (mobileMenuToggle) {
@@ -80,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Close mobile menu when a link is clicked
-    navLinks.forEach(link => {
+    allNavLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             // If it's a mobile nav link and has href starting with #
             if (this.classList.contains('mobile-nav-link') || this.classList.contains('nav-link')) {

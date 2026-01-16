@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customize Your T-Shirt | FunKustoms | Design Tool</title>
+    <meta name="description" content="Design and customize your own t-shirt with FunKustoms. Upload your design and see live preview." />
+    <meta name="author" content="FunKustoms" />
+    <meta name="keywords" content="customize t-shirt, design tool, print on demand" />
+    <link rel="canonical" href="https://funkustoms.com/customize" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .product-preview-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .product-image {
+            width: 100%;
+            background-color: #f0f0f0;
+            border-radius: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .design-preview-canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 70%;
+            max-height: 60%;
+            opacity: 0.9;
+        }
+        .thumbnail-container {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            border-radius: 0.5rem;
+            border: 2px solid transparent;
+            overflow: hidden;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .thumbnail.active {
+            border-color: var(--accent);
+        }
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            border-color: var(--accent);
+            background-color: rgba(247, 120, 54, 0.05);
+        }
+        .upload-area.dragover {
+            border-color: var(--accent);
+            background-color: rgba(247, 120, 54, 0.1);
+        }
+        .size-price-button {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            background-color: transparent;
+            color: var(--fg);
+            font-weight: 600;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            min-width: 70px;
+        }
+        .size-price-button.active {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        .color-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .color-circle.selected {
+            border-width: 4px;
+        }
+        @media (max-width: 768px) {
+            .product-preview-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #ffffff; backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo.png" alt="FunKustoms" style="height: 2rem; width: auto;">
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="customize.html">Customize</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bulk-orders.html">Bulk Orders</a>
+                    </li>
+                </ul>
+
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <button class="btn btn-sm user-btn" title="User account" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-user" style="font-size: 1.25rem; color: var(--fg);"></i>
+                    </button>
+                    <button class="btn btn-sm cart-btn position-relative" title="Shopping cart" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-shopping-bag" style="font-size: 1.25rem; color: var(--fg);"></i>
+                        <span class="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                    </button>
+                    <a href="customize.html" class="btn btn-primary btn-sm">Start Customizing</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 5rem; padding-bottom: 3rem;">
+        <!-- Breadcrumb -->
+        <section style="background-color: #f9f8f6; padding: 1rem 0; border-bottom: 1px solid var(--border);">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0" style="background-color: transparent; padding: 0;">
+                        <li class="breadcrumb-item"><a href="index.html" style="color: var(--primary); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item active">Customize</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Product Categories Selection -->
+        <section style="background-color: #ffffff; padding: 2.5rem 0; border-bottom: 1px solid var(--border);">
+            <div class="container">
+                <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; color: var(--fg);">Select Product Type</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1.5rem;">
+                    <!-- T-Shirts -->
+                    <div class="category-card active" onclick="selectProductCategory(this, 'tshirt', 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80', 'Unisex Classic Crew T-Shirt | UC21')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid var(--accent); transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&q=80" alt="T-Shirts" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">T-Shirts</p>
+                        </div>
+                    </div>
+
+                    <!-- Hoodies & Jackets -->
+                    <div class="category-card" onclick="selectProductCategory(this, 'hoodie', 'https://images.unsplash.com/photo-1556821552-5f0a9f1b8e2a?w=500&q=80', 'Premium Hoodie | HOD01')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1556821552-5f0a9f1b8e2a?w=150&q=80" alt="Hoodies & Jackets" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">Hoodies & Jackets</p>
+                        </div>
+                    </div>
+
+                    <!-- Polo Shirts -->
+                    <div class="category-card" onclick="selectProductCategory(this, 'polo', 'https://images.unsplash.com/photo-1579965342575-16428a7c3ca8?w=500&q=80', 'Classic Polo Shirt | POL02')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1579965342575-16428a7c3ca8?w=150&q=80" alt="Polo Shirts" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">Polo Shirts</p>
+                        </div>
+                    </div>
+
+                    <!-- Tank Tops -->
+                    <div class="category-card" onclick="selectProductCategory(this, 'tank', 'https://images.unsplash.com/photo-1548126328-c9fa89d128fa?w=500&q=80', 'Classic Tank Top | TNK03')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1548126328-c9fa89d128fa?w=150&q=80" alt="Tank Tops" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">Tank Tops</p>
+                        </div>
+                    </div>
+
+                    <!-- Sweatshirts -->
+                    <div class="category-card" onclick="selectProductCategory(this, 'sweatshirt', 'https://images.unsplash.com/photo-1556821552-5f0a9f1b8e2a?w=500&q=80', 'Comfort Sweatshirt | SWS04')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1556821552-5f0a9f1b8e2a?w=150&q=80" alt="Sweatshirts" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">Sweatshirts</p>
+                        </div>
+                    </div>
+
+                    <!-- Long Sleeves -->
+                    <div class="category-card" onclick="selectProductCategory(this, 'longsleeve', 'https://images.unsplash.com/photo-1552508744-3b4a856d6c69?w=500&q=80', 'Long Sleeve Shirt | LSL05')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1552508744-3b4a856d6c69?w=500&q=80" alt="Long Sleeves" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">Long Sleeves</p>
+                        </div>
+                    </div>
+
+                    <!-- Jackets -->
+                    <div class="category-card" onclick="selectProductCategory(this, 'jacket', 'https://images.unsplash.com/photo-1557804506-669714128632?w=500&q=80', 'Premium Jacket | JCK06')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1557804506-669714128632?w=500&q=80" alt="Jackets" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">Jackets</p>
+                        </div>
+                    </div>
+
+                    <!-- Accessories -->
+                    <div class="category-card" onclick="selectProductCategory(this, 'accessories', 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80', 'Premium Accessories | ACC07')" style="cursor: pointer; border-radius: 1rem; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease;">
+                        <div style="background-color: #f0f0f0; padding: 1.5rem; height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80" alt="Accessories" style="height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="padding: 1rem; background: white; text-align: center;">
+                            <p style="margin: 0; font-weight: 600; color: var(--fg); font-size: 0.95rem;">Accessories</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customization Section -->
+        <section style="background-color: #ffffff; padding: 3rem 0;">
+            <div class="container">
+                <h1 id="productTitle" style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 3rem; color: var(--fg);">
+                    Unisex Classic Crew T-Shirt | UC21
+                </h1>
+
+                <div class="row g-5">
+                    <!-- Left: Product Preview -->
+                    <div class="col-lg-5">
+                        <div class="product-preview-container">
+                            <div class="product-image" style="background-color: #f0f0f0; padding: 2rem; border-radius: 1rem; position: relative;">
+                                <img id="productImage" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80" alt="T-Shirt Product" style="display: block;">
+                                
+                                <!-- Outer Canvas Container (22" × 36") -->
+                                <div id="outerCanvasContainer" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 550px; height: 900px; border: 2px solid #999; background: rgba(200, 200, 200, 0.1); display: none; overflow: hidden; cursor: crosshair;">
+                                    
+                                    <!-- Inner Design Border (Draggable within outer canvas) -->
+                                    <div id="designBorder" style="position: absolute; border: 2px dashed #f77836; display: none; background: rgba(247, 120, 54, 0.05); cursor: grab;">
+                                        <canvas id="designCanvas" class="design-preview-canvas" width="150" height="150" style="display: block; position: relative; z-index: 2;"></canvas>
+                                        
+                                        <!-- Corner Handles -->
+                                        <div class="resize-handle" id="handle-tl" style="position: absolute; top: -6px; left: -6px; width: 12px; height: 12px; background: #f77836; border: 2px solid white; border-radius: 50%; cursor: nwse-resize; z-index: 10;"></div>
+                                        <div class="resize-handle" id="handle-tr" style="position: absolute; top: -6px; right: -6px; width: 12px; height: 12px; background: #f77836; border: 2px solid white; border-radius: 50%; cursor: nesw-resize; z-index: 10;"></div>
+                                        <div class="resize-handle" id="handle-bl" style="position: absolute; bottom: -6px; left: -6px; width: 12px; height: 12px; background: #f77836; border: 2px solid white; border-radius: 50%; cursor: nesw-resize; z-index: 10;"></div>
+                                        <div class="resize-handle" id="handle-br" style="position: absolute; bottom: -6px; right: -6px; width: 12px; height: 12px; background: #f77836; border: 2px solid white; border-radius: 50%; cursor: nwse-resize; z-index: 10;"></div>
+                                        
+                                        <!-- Size Indicator -->
+                                        <div style="position: absolute; top: -25px; left: 0; right: 0; text-align: center; font-size: 0.75rem; color: #f77836; font-weight: 600; white-space: nowrap;">
+                                            <span id="sizeIndicator">6" × 6" (36 sq in)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Thumbnails -->
+                        <div class="thumbnail-container">
+                            <div class="thumbnail active" onclick="selectView('front')" style="border-color: var(--accent);" title="Front">
+                                <img id="thumbFront" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&q=80" alt="Front">
+                                <span style="position: absolute; bottom: 5px; left: 5px; font-size: 0.7rem; color: white; background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius: 3px; display: none;">Front</span>
+                            </div>
+                            <div class="thumbnail" onclick="selectView('back')" title="Back">
+                                <img id="thumbBack" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&q=80" alt="Back">
+                            </div>
+                            <div class="thumbnail" onclick="selectView('left')" title="Left Pocket">
+                                <img id="thumbLeft" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&q=80" alt="Left Pocket">
+                            </div>
+                            <div class="thumbnail" onclick="selectView('right')" title="Right Pocket">
+                                <img id="thumbRight" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&q=80" alt="Right Pocket">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Customization Options -->
+                    <div class="col-lg-7">
+                        <!-- Upload Design -->
+                        <div style="margin-bottom: 2rem;">
+                            <label style="font-weight: 600; color: var(--fg); display: block; margin-bottom: 1rem; font-size: 0.95rem;">
+                                <i class="fas fa-upload" style="color: var(--accent); margin-right: 0.5rem;"></i>Upload Your Design
+                            </label>
+                            <div class="upload-area" id="uploadArea" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;"></i>
+                                <p style="color: var(--muted-fg); margin: 0.5rem 0; font-size: 0.95rem;">
+                                    Drag and drop your design here or click to browse
+                                </p>
+                                <p style="color: var(--muted-fg); font-size: 0.85rem; margin: 0;">
+                                    Supported formats: PNG, JPG, SVG (Max 25MB)
+                                </p>
+                                <input type="file" id="designInput" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
+                            </div>
+                        </div>
+
+                        <!-- Design Resizing Instructions -->
+                        <div style="margin-bottom: 2rem; background-color: #fffbf0; padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid var(--accent);">
+                            <label style="font-weight: 600; color: var(--fg); display: block; margin-bottom: 0.75rem; font-size: 0.95rem;">
+                                <i class="fas fa-expand" style="color: var(--accent); margin-right: 0.5rem;"></i>Resize & Position Your Design
+                            </label>
+                            <p style="font-size: 0.9rem; color: var(--muted-fg); margin: 0.5rem 0;">
+                                <strong>Canvas:</strong> The gray rectangle is your print area (22" wide × 36" tall max).
+                            </p>
+                            <p style="font-size: 0.9rem; color: var(--muted-fg); margin: 0.5rem 0;">
+                                <strong>Resize:</strong> Drag the orange corner handles to resize your design while maintaining proportions.
+                            </p>
+                            <p style="font-size: 0.9rem; color: var(--muted-fg); margin: 0.5rem 0;">
+                                <strong>Position:</strong> Drag the design (inside the gray rectangle) to place it anywhere within the print area.
+                            </p>
+                            <div style="background: white; padding: 0.75rem; border-radius: 0.5rem; font-size: 0.9rem; color: var(--fg); display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Current Size:</strong><br>
+                                    <span id="sizeDisplayText" style="font-size: 1rem; color: var(--accent); font-weight: 600;">6" × 6" (36 sq in)</span>
+                                </div>
+                                <div style="text-align: right;">
+                                    <p style="margin: 0; font-size: 0.8rem; color: var(--muted-fg);">Min: 2" × 2"</p>
+                                    <p style="margin: 0; font-size: 0.8rem; color: var(--muted-fg);">Max: 15" × 15"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Printing Method (DTF Only) -->
+                        <div style="margin-bottom: 2rem; background-color: #f0f0f0; padding: 1.5rem; border-radius: 0.75rem;">
+                            <label style="font-weight: 600; color: var(--fg); display: block; margin-bottom: 0.75rem; font-size: 0.95rem;">Printing Method</label>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <i class="fas fa-check-circle" style="color: var(--accent); font-size: 1.25rem;"></i>
+                                <span style="font-weight: 500; color: var(--fg);">DTF Printing (Direct-to-Film)</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--muted-fg); margin-top: 0.75rem; margin-bottom: 0;">Premium quality, vibrant colors, perfect for custom designs</p>
+                        </div>
+
+                        <!-- Size Selection with Prices -->
+                        <div style="margin-bottom: 2rem;">
+                            <label style="font-weight: 600; color: var(--fg); display: block; margin-bottom: 1rem; font-size: 0.95rem;">Select Size & Price</label>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 0.5rem;">
+                                <button class="size-price-button active" onclick="selectSize('XS', 200, this)">XS<br><small style="font-size: 0.7rem;">₹200</small></button>
+                                <button class="size-price-button" onclick="selectSize('S', 200, this)">S<br><small style="font-size: 0.7rem;">₹200</small></button>
+                                <button class="size-price-button" onclick="selectSize('M', 200, this)">M<br><small style="font-size: 0.7rem;">₹200</small></button>
+                                <button class="size-price-button" onclick="selectSize('L', 200, this)">L<br><small style="font-size: 0.7rem;">₹200</small></button>
+                                <button class="size-price-button" onclick="selectSize('XL', 200, this)">XL<br><small style="font-size: 0.7rem;">₹200</small></button>
+                                <button class="size-price-button" onclick="selectSize('2XL', 250, this)">2XL<br><small style="font-size: 0.7rem;">₹250</small></button>
+                                <button class="size-price-button" onclick="selectSize('3XL', 250, this)">3XL<br><small style="font-size: 0.7rem;">₹250</small></button>
+                                <button class="size-price-button" onclick="selectSize('4XL', 250, this)">4XL<br><small style="font-size: 0.7rem;">₹250</small></button>
+                                <button class="size-price-button" onclick="selectSize('5XL', 300, this)">5XL<br><small style="font-size: 0.7rem;">₹300</small></button>
+                                <button class="size-price-button" onclick="selectSize('6XL', 300, this)">6XL<br><small style="font-size: 0.7rem;">₹300</small></button>
+                            </div>
+                        </div>
+
+                        <!-- Color Selection -->
+                        <div style="margin-bottom: 2rem;">
+                            <label style="font-weight: 600; color: var(--fg); display: block; margin-bottom: 1rem; font-size: 0.95rem;">T-Shirt Color</label>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                                <button class="color-circle selected" onclick="selectColor('#000000', this)" style="background-color: #000000; border: 4px solid var(--fg);" title="Black"></button>
+                                <button class="color-circle" onclick="selectColor('#FFFFFF', this)" style="background-color: #FFFFFF; border: 1px solid #ccc;" title="White"></button>
+                                <button class="color-circle" onclick="selectColor('#808080', this)" style="background-color: #808080; border: 1px solid rgba(0,0,0,0.2);" title="Gray"></button>
+                                <button class="color-circle" onclick="selectColor('#000080', this)" style="background-color: #000080; border: 1px solid rgba(0,0,0,0.2);" title="Navy"></button>
+                                <button class="color-circle" onclick="selectColor('#DC143C', this)" style="background-color: #DC143C; border: 1px solid rgba(0,0,0,0.2);" title="Red"></button>
+                                <button class="color-circle" onclick="selectColor('#0000FF', this)" style="background-color: #0000FF; border: 1px solid rgba(0,0,0,0.2);" title="Blue"></button>
+                                <button class="color-circle" onclick="selectColor('#008000', this)" style="background-color: #008000; border: 1px solid rgba(0,0,0,0.2);" title="Green"></button>
+                                <button class="color-circle" onclick="selectColor('#FFFF00', this)" style="background-color: #FFFF00; border: 1px solid rgba(0,0,0,0.2);" title="Yellow"></button>
+                                <button class="color-circle" onclick="selectColor('#FFA500', this)" style="background-color: #FFA500; border: 1px solid rgba(0,0,0,0.2);" title="Orange"></button>
+                                <button class="color-circle" onclick="selectColor('#FFC0CB', this)" style="background-color: #FFC0CB; border: 1px solid rgba(0,0,0,0.2);" title="Pink"></button>
+                            </div>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div style="background-color: #fff8f0; border: 2px solid var(--accent); padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 2rem;">
+                            <h5 style="color: var(--fg); margin: 0 0 1rem 0; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-tag" style="color: var(--accent);"></i>Price Breakdown
+                            </h5>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(247, 120, 54, 0.2);">
+                                    <span style="color: var(--muted-fg);">Design Cost (<span id="designSqInches">36</span> sq inch @ ₹1)</span>
+                                    <span style="font-weight: 600; color: var(--fg);">₹<span id="designCost">36</span></span>
+                                </div>
+                                <div id="roundedOffRow" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(247, 120, 54, 0.2);">
+                                    <span style="color: var(--muted-fg);">Rounded Off <span style="font-size: 0.75rem; color: #999;">(for easier calculation)</span></span>
+                                    <span id="roundedOffAmount" style="font-weight: 600; color: var(--fg);">₹0</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(247, 120, 54, 0.2);">
+                                    <span style="color: var(--muted-fg);">T-Shirt Base Price (<span id="sizeDisplay">XS</span>)</span>
+                                    <span style="font-weight: 600; color: var(--fg);">₹<span id="tshirtCost">200</span></span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(247, 120, 54, 0.2);">
+                                    <span style="color: var(--muted-fg);">Subtotal</span>
+                                    <span style="font-weight: 600; color: var(--fg);">₹<span id="subtotal">236</span></span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 2px solid var(--accent);">
+                                    <span style="color: var(--muted-fg);">GST (5%)</span>
+                                    <span style="font-weight: 600; color: var(--fg);">₹<span id="gst">11.80</span></span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; background-color: var(--accent); color: white; padding: 0.75rem; border-radius: 0.5rem; margin-top: 0.5rem;">
+                                    <span style="font-weight: 600;">Total Price</span>
+                                    <span style="font-size: 1.25rem; font-weight: 700;">₹<span id="totalPrice">247.80</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
+                            <button id="addDesignBtn" onclick="triggerUpload()" style="background-color: var(--accent); color: white; border: none; padding: 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <i class="fas fa-plus"></i>
+                                Add Your Design
+                            </button>
+                            <button id="saveBtn" onclick="saveDesign()" style="background-color: var(--primary); color: white; border: none; padding: 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <i class="fas fa-save"></i>
+                                Save Design
+                            </button>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <button id="shareWhatsappBtn" onclick="shareOnWhatsapp()" style="background-color: #25d366; color: white; border: none; padding: 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </button>
+                                <button id="shareEmailBtn" onclick="shareOnEmail()" style="background-color: #EA4335; color: white; border: none; padding: 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                    <i class="fas fa-envelope"></i>
+                                    Email
+                                </button>
+                            </div>
+
+                            <!-- Sharing Instructions -->
+                            <div style="background-color: #f0f8ff; border-left: 4px solid var(--primary); padding: 1rem; border-radius: 0.5rem; margin-top: 1.5rem;">
+                                <h5 style="color: var(--primary); margin-bottom: 0.75rem; font-weight: 600; font-size: 0.95rem;">
+                                    <i class="fas fa-info-circle"></i> Sharing Your Design
+                                </h5>
+                                <div style="font-size: 0.9rem; color: var(--fg); line-height: 1.6;">
+                                    <p style="margin-bottom: 0.75rem;"><strong>WhatsApp:</strong></p>
+                                    <ol style="margin-bottom: 1rem; padding-left: 1.5rem;">
+                                        <li>Click the WhatsApp button</li>
+                                        <li>Message with your design specs will open</li>
+                                        <li>Your design image is automatically downloaded</li>
+                                        <li>Send the message, then attach the image separately</li>
+                                    </ol>
+                                    <p style="margin-bottom: 0.75rem;"><strong>Email:</strong></p>
+                                    <ol style="margin-bottom: 0; padding-left: 1.5rem;">
+                                        <li>Click the Email button</li>
+                                        <li>Your design image is automatically downloaded</li>
+                                        <li>Pre-written email opens with your specs</li>
+                                        <li>Attach the downloaded image and send</li>
+                                    </ol>
+                                </div>
+                                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(65, 105, 225, 0.2); font-size: 0.85rem; color: var(--muted-fg);">
+                                    💡 <strong>Tip:</strong> The Base64 encoded image is embedded in the email body for reference. Your attachment ensures the FunKustoms team receives your design clearly.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5" style="background-color: var(--fg); color: rgba(248, 237, 213, 0.8);">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-md-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">FunKustoms</h5>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li><a href="about.html" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">About Us</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">Blog</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Shop</h5>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li><a href="shop.html?category=t-shirts" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">T-Shirts</a></li>
+                        <li><a href="shop.html?category=hoodies" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">Hoodies</a></li>
+                        <li><a href="shop.html?category=mugs" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">Mugs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Support</h5>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">FAQ</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">Help Center</a></li>
+                        <li><a href="#" style="color: rgba(248, 237, 213, 0.8); text-decoration: none; font-size: 0.9rem;">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Newsletter</h5>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control form-control-sm" placeholder="Your email" required style="background-color: rgba(248, 237, 213, 0.1); border: 1px solid rgba(248, 237, 213, 0.2); color: white;">
+                        <button type="submit" class="btn btn-sm btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr style="border-color: rgba(248, 237, 213, 0.2); margin: 2rem 0;">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p style="margin: 0; font-size: 0.85rem;">
+                        © 2026 FunKustoms. All rights reserved. | 
+                        <a href="#" style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.5); text-decoration: none;">Privacy Policy</a> | 
+                        <a href="#" style="font-size: 0.9rem; color: rgba(248, 237, 213, 0.5); text-decoration: none;">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-links d-flex justify-content-md-end gap-3">
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: rgba(248, 237, 213, 0.6); text-decoration: none; font-size: 1rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+
+    <script>
+        // Design state
+        let designData = {
+            image: null,
+            size: 'XS',
+            tshirtPrice: 200,
+            color: '#000000',
+            printing: 'DTF',
+            view: 'front',
+            designWidth: 6,  // inches
+            designHeight: 6,  // inches
+            positionX: 0,  // pixels from left
+            positionY: 0   // pixels from top
+        };
+
+        let designImage = null;
+
+        // Resize handle state
+        let isResizing = false;
+        let activeHandle = null;
+        let startX = 0;
+        let startY = 0;
+        let startWidth = 150;
+        let startHeight = 150;
+        let imageAspectRatio = 1; // Will be set when image is loaded
+
+        // Drag state
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let dragStartPosX = 0;
+        let dragStartPosY = 0;
+
+        // Calculate and update pricing
+        function calculatePricing() {
+            const designArea = designData.designWidth * designData.designHeight;
+            const rawDesignCost = designArea * 1; // ₹1 per sq inch
+            
+            // Round design cost to nearest multiple of 5
+            const roundedDesignCost = Math.round(rawDesignCost / 5) * 5;
+            const roundedOffAmount = roundedDesignCost - rawDesignCost;
+            
+            const tshirtCost = designData.tshirtPrice;
+            const subtotal = roundedDesignCost + tshirtCost;
+            const gst = subtotal * 0.05;
+            const totalPrice = subtotal + gst;
+
+            // Update display
+            document.getElementById('designSqInches').textContent = designArea.toFixed(2);
+            document.getElementById('designCost').textContent = rawDesignCost.toFixed(2);
+            
+            // Format rounded off display (show +/- sign)
+            const roundedOffDisplay = roundedOffAmount >= 0 
+                ? `+₹${roundedOffAmount.toFixed(2)}` 
+                : `-₹${Math.abs(roundedOffAmount).toFixed(2)}`;
+            document.getElementById('roundedOffAmount').textContent = roundedOffDisplay;
+            
+            // Color the rounded off amount (green for discount, red for addition)
+            const roundedOffElement = document.getElementById('roundedOffAmount');
+            if (roundedOffAmount > 0) {
+                roundedOffElement.style.color = '#dc3545'; // red - paying more
+            } else if (roundedOffAmount < 0) {
+                roundedOffElement.style.color = '#28a745'; // green - discount
+            } else {
+                roundedOffElement.style.color = 'var(--fg)';
+            }
+            
+            document.getElementById('tshirtCost').textContent = tshirtCost;
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('gst').textContent = gst.toFixed(2);
+            document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+            
+            // Update size display
+            document.getElementById('sizeDisplayText').textContent = `${designData.designWidth}" × ${designData.designHeight}" (${designArea.toFixed(2)} sq in)`;
+            document.getElementById('sizeIndicator').textContent = `${designData.designWidth}" × ${designData.designHeight}" (${designArea.toFixed(2)} sq in)`;
+        }
+
+        // Convert pixels to inches (assuming ~96 pixels = 1 inch)
+        function pixelsToInches(pixels) {
+            return Math.max(2, Math.min(15, parseFloat((pixels / 25).toFixed(1))));
+        }
+
+        // Convert inches to pixels
+        function inchesToPixels(inches) {
+            return inches * 25;
+        }
+
+        // Update resize handles
+        function updateResizeHandles() {
+            const border = document.getElementById('designBorder');
+            const canvas = document.getElementById('designCanvas');
+            const outerContainer = document.getElementById('outerCanvasContainer');
+            
+            if (border && canvas && outerContainer) {
+                // Show outer canvas when design is uploaded
+                outerContainer.style.display = 'block';
+                
+                // Set design border size
+                border.style.width = inchesToPixels(designData.designWidth) + 'px';
+                border.style.height = inchesToPixels(designData.designHeight) + 'px';
+                canvas.width = inchesToPixels(designData.designWidth);
+                canvas.height = inchesToPixels(designData.designHeight);
+                border.style.cursor = 'grab';
+                
+                // Position within outer canvas
+                border.style.left = designData.positionX + 'px';
+                border.style.top = designData.positionY + 'px';
+                
+                drawDesignPreview();
+                calculatePricing();
+            }
+        }
+
+        // Start dragging design
+        function startDragDesign(e) {
+            const border = document.getElementById('designBorder');
+            const outerContainer = document.getElementById('outerCanvasContainer');
+            if (!border || !outerContainer || !designImage) return;
+            
+            isDragging = true;
+            dragStartX = e.clientX || e.touches[0].clientX;
+            dragStartY = e.clientY || e.touches[0].clientY;
+            dragStartPosX = parseInt(border.style.left) || 0;
+            dragStartPosY = parseInt(border.style.top) || 0;
+            border.style.cursor = 'grabbing';
+            e.preventDefault();
+        }
+
+        // Handle dragging design
+        function handleDragDesign(e) {
+            if (!isDragging) return;
+            
+            const border = document.getElementById('designBorder');
+            const outerContainer = document.getElementById('outerCanvasContainer');
+            if (!border || !outerContainer || !designImage) return;
+            
+            const currentX = e.clientX || e.touches[0].clientX;
+            const currentY = e.clientY || e.touches[0].clientY;
+            
+            const deltaX = currentX - dragStartX;
+            const deltaY = currentY - dragStartY;
+            
+            let newX = dragStartPosX + deltaX;
+            let newY = dragStartPosY + deltaY;
+            
+            // Get outer canvas dimensions (22" × 36" = 550px × 900px)
+            const outerWidth = outerContainer.offsetWidth;
+            const outerHeight = outerContainer.offsetHeight;
+            const designWidth = border.offsetWidth;
+            const designHeight = border.offsetHeight;
+            
+            // Constrain position within outer canvas bounds
+            newX = Math.max(0, Math.min(outerWidth - designWidth, newX));
+            newY = Math.max(0, Math.min(outerHeight - designHeight, newY));
+            
+            border.style.left = newX + 'px';
+            border.style.top = newY + 'px';
+            
+            designData.positionX = newX;
+            designData.positionY = newY;
+            
+            drawDesignPreview();
+        }
+
+        // Stop dragging design
+        function stopDragDesign() {
+            isDragging = false;
+            const border = document.getElementById('designBorder');
+            if (border) {
+                border.style.cursor = 'grab';
+            }
+        }
+
+        // Start resizing
+        function startResize(e, handle) {
+            isResizing = true;
+            activeHandle = handle;
+            startX = e.clientX;
+            startY = e.clientY;
+            const border = document.getElementById('designBorder');
+            startWidth = border.offsetWidth;
+            startHeight = border.offsetHeight;
+            e.preventDefault();
+        }
+
+        // Handle resize with aspect ratio locked
+        function handleResize(e) {
+            if (!isResizing) return;
+
+            let deltaX = e.clientX - startX;
+            let deltaY = e.clientY - startY;
+            let newWidth = startWidth;
+            let newHeight = startHeight;
+
+            // Calculate resize based on which handle is being dragged
+            // Use the larger delta to determine the resize amount
+            const absDeltaX = Math.abs(deltaX);
+            const absDeltaY = Math.abs(deltaY);
+
+            // For corner handles, use the handle direction to determine resize
+            if (activeHandle.includes('r')) {
+                // Right side - use X delta
+                newWidth = startWidth + deltaX;
+                newHeight = newWidth / imageAspectRatio;
+            } else if (activeHandle.includes('l')) {
+                // Left side - use X delta
+                newWidth = startWidth - deltaX;
+                newHeight = newWidth / imageAspectRatio;
+            }
+
+            if (activeHandle.includes('b')) {
+                // Bottom side - use Y delta
+                newHeight = startHeight + deltaY;
+                newWidth = newHeight * imageAspectRatio;
+            } else if (activeHandle.includes('t')) {
+                // Top side - use Y delta
+                newHeight = startHeight - deltaY;
+                newWidth = newHeight * imageAspectRatio;
+            }
+
+            // Minimum size (2 inches = 50px)
+            // Maximum size (15 inches = 375px)
+            newWidth = Math.max(50, Math.min(newWidth, 375));
+            newHeight = newWidth / imageAspectRatio;
+
+            // Double-check height is within bounds
+            newHeight = Math.max(50, Math.min(newHeight, 375));
+            if (newHeight !== startHeight / imageAspectRatio) {
+                newWidth = newHeight * imageAspectRatio;
+            }
+
+            designData.designWidth = pixelsToInches(newWidth);
+            designData.designHeight = pixelsToInches(newHeight);
+
+            updateResizeHandles();
+        }
+
+        // Stop resizing
+        function stopResize() {
+            isResizing = false;
+            activeHandle = null;
+        }
+
+        // Product categories data
+        const productCategories = {
+            tshirt: { name: 'Unisex Classic Crew T-Shirt | UC21', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80' },
+            hoodie: { name: 'Premium Hoodie | HOD01', image: 'https://images.unsplash.com/photo-1556821552-5f0a9f1b8e2a?w=500&q=80' },
+            polo: { name: 'Classic Polo Shirt | POL02', image: 'https://images.unsplash.com/photo-1579965342575-16428a7c3ca8?w=500&q=80' },
+            tank: { name: 'Classic Tank Top | TNK03', image: 'https://images.unsplash.com/photo-1548126328-c9fa89d128fa?w=500&q=80' },
+            sweatshirt: { name: 'Comfort Sweatshirt | SWS04', image: 'https://images.unsplash.com/photo-1556821552-5f0a9f1b8e2a?w=500&q=80' },
+            longsleeve: { name: 'Long Sleeve Shirt | LSL05', image: 'https://images.unsplash.com/photo-1552508744-3b4a856d6c69?w=500&q=80' },
+            jacket: { name: 'Premium Jacket | JCK06', image: 'https://images.unsplash.com/photo-1557804506-669714128632?w=500&q=80' },
+            accessories: { name: 'Premium Accessories | ACC07', image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80' }
+        };
+
+        // Select product category
+        function selectProductCategory(element, category, imageUrl, title) {
+            // Update active state on category cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.style.borderColor = 'transparent';
+            });
+            element.style.borderColor = 'var(--accent)';
+
+            // Update product image and title
+            document.getElementById('productImage').src = imageUrl;
+            document.getElementById('productTitle').textContent = title;
+
+            // Update thumbnails
+            document.getElementById('thumbFront').src = imageUrl.replace('w=500', 'w=150');
+            document.getElementById('thumbBack').src = imageUrl.replace('w=500', 'w=150');
+            document.getElementById('thumbLeft').src = imageUrl.replace('w=500', 'w=150');
+            document.getElementById('thumbRight').src = imageUrl.replace('w=500', 'w=150');
+
+            // Reset canvas
+            designData.view = 'front';
+        }
+
+        // Trigger file upload
+        function triggerUpload() {
+            const input = document.getElementById('designInput');
+            if (input) {
+                input.click();
+            } else {
+                alert('Upload input not found. Please refresh the page.');
+            }
+        }
+
+        // Handle file upload
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 25 * 1024 * 1024) {
+                alert('File size must be less than 25MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                designImage = new Image();
+                designImage.onload = function() {
+                    try {
+                        designData.image = e.target.result;
+                        
+                        // Center design in outer canvas (22" = 550px, 36" = 900px)
+                        // Initial position: center of outer canvas
+                        const outerWidth = 550; // 22 inches
+                        const outerHeight = 900; // 36 inches
+                        const designPxWidth = inchesToPixels(designData.designWidth);
+                        const designPxHeight = inchesToPixels(designData.designHeight);
+                        
+                        designData.positionX = (outerWidth - designPxWidth) / 2;
+                        designData.positionY = (outerHeight - designPxHeight) / 2;
+                        
+                        // Capture image aspect ratio for proportional resizing
+                        imageAspectRatio = designImage.width / designImage.height;
+                        
+                        // Show design border
+                        const border = document.getElementById('designBorder');
+                        if (border) {
+                            border.style.display = 'block';
+                        }
+                        
+                        drawDesignPreview();
+                        updateResizeHandles();
+                        calculatePricing();
+                        
+                        const uploadArea = document.getElementById('uploadArea');
+                        if (uploadArea) {
+                            uploadArea.style.borderColor = 'var(--accent)';
+                            uploadArea.style.backgroundColor = 'rgba(247, 120, 54, 0.05)';
+                        }
+                        
+                        console.log('Design uploaded successfully');
+                    } catch (error) {
+                        console.error('Error processing design:', error);
+                        alert('Error processing design. Please try again.');
+                    }
+                };
+                designImage.onerror = function() {
+                    alert('Failed to load image. Please try a different file.');
+                };
+                designImage.src = e.target.result;
+            };
+            reader.onerror = function() {
+                alert('Failed to read file. Please try again.');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Drag and drop handlers
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('uploadArea').classList.add('dragover');
+        }
+
+        function handleDragLeave(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('uploadArea').classList.remove('dragover');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('uploadArea').classList.remove('dragover');
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('designInput').files = files;
+                handleFileUpload({ target: { files: files } });
+            }
+        }
+
+        // Draw design preview on canvas
+        function drawDesignPreview() {
+            const canvas = document.getElementById('designCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (designImage) {
+                // Draw design centered on canvas, maintaining aspect ratio
+                let width = canvas.width;
+                let height = canvas.height;
+                let x = 0;
+                let y = 0;
+
+                // Calculate aspect ratios
+                const imgAspect = designImage.width / designImage.height;
+                const canvasAspect = canvas.width / canvas.height;
+
+                // Maintain aspect ratio while filling canvas
+                if (imgAspect > canvasAspect) {
+                    // Image is wider
+                    height = canvas.width / imgAspect;
+                    y = (canvas.height - height) / 2;
+                } else {
+                    // Image is taller
+                    width = canvas.height * imgAspect;
+                    x = (canvas.width - width) / 2;
+                }
+
+                ctx.drawImage(designImage, x, y, width, height);
+            }
+        }
+
+        // Select size
+        function selectSize(size, price, button) {
+            designData.size = size;
+            designData.tshirtPrice = price;
+            document.querySelectorAll('.size-price-button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Update display and pricing
+            document.getElementById('sizeDisplay').textContent = size;
+            calculatePricing();
+        }
+
+        // Select view
+        function selectView(view) {
+            designData.view = view;
+            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+            event.target.closest('.thumbnail').classList.add('active');
+        }
+
+        // Select color
+        function selectColor(color, button) {
+            designData.color = color;
+            document.querySelectorAll('.color-circle').forEach(btn => {
+                btn.style.borderWidth = '1px';
+                btn.classList.remove('selected');
+            });
+            button.style.borderWidth = '4px';
+            button.classList.add('selected');
+        }
+
+        // Save design
+        function saveDesign() {
+            if (!designData.image) {
+                alert('Please upload a design first');
+                return;
+            }
+
+            const savedDesign = {
+                ...designData,
+                savedAt: new Date().toLocaleString()
+            };
+
+            localStorage.setItem('funkustoms_design', JSON.stringify(savedDesign));
+            
+            // Download the composite image
+            downloadDesignImage();
+            
+            alert('Design saved and downloaded! 🎉');
+        }
+
+        // Share on WhatsApp
+        function shareOnWhatsapp() {
+            if (!designData.image) {
+                alert('Please save your design first');
+                return;
+            }
+
+            const designArea = designData.designWidth * designData.designHeight;
+            const designCost = designArea * 1;
+            const subtotal = designCost + designData.tshirtPrice;
+            const gst = subtotal * 0.05;
+            const totalPrice = subtotal + gst;
+
+            const message = `Hi FunKustoms! I've customized a t-shirt with my design:
+
+📏 Design Details:
+- Design Size: ${designData.designWidth}" x ${designData.designHeight}" (${designArea} sq inches)
+- T-Shirt Size: ${designData.size}
+- T-Shirt Color: ${designData.color}
+- Printing Method: ${designData.printing}
+
+💰 Pricing:
+- Design Cost: ₹${designCost} (@ ₹1/sq inch)
+- T-Shirt Base: ₹${designData.tshirtPrice}
+- Subtotal: ₹${subtotal}
+- GST (5%): ₹${gst.toFixed(2)}
+- Total: ₹${totalPrice.toFixed(2)}
+
+📎 I will share my design image in the next message.
+
+Please confirm and let me know the next steps to proceed with the order!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Auto-download the image for manual sharing
+            downloadDesignImage();
+            
+            // Show instructions
+            setTimeout(() => {
+                alert('📥 Design image downloaded!\n\n📱 INSTRUCTIONS:\n1. WhatsApp will open\n2. Send the message\n3. Then attach/send the downloaded image as a separate message\n\nThis ensures your design is clearly shared with FunKustoms team.');
+                window.open(`https://wa.me/918237603202?text=${encodedMessage}`, '_blank');
+            }, 500);
+        }
+
+        // Share on Email
+        function shareOnEmail() {
+            if (!designData.image) {
+                alert('Please save your design first');
+                return;
+            }
+
+            const designArea = designData.designWidth * designData.designHeight;
+            const designCost = designArea * 1;
+            const subtotal = designCost + designData.tshirtPrice;
+            const gst = subtotal * 0.05;
+            const totalPrice = subtotal + gst;
+
+            const emailBody = `Hi FunKustoms,
+
+I would like to place a custom t-shirt order with the following specifications:
+
+📏 DESIGN DETAILS:
+Design Size: ${designData.designWidth}" x ${designData.designHeight}" (${designArea} sq inches)
+T-Shirt Size: ${designData.size}
+T-Shirt Color: ${designData.color}
+Printing Method: ${designData.printing}
+
+💰 PRICING BREAKDOWN:
+Design Cost: ₹${designCost} (@ ₹1/sq inch)
+T-Shirt Base Price: ₹${designData.tshirtPrice}
+Subtotal: ₹${subtotal}
+GST (5%): ₹${gst.toFixed(2)}
+Total Price: ₹${totalPrice.toFixed(2)}
+
+I have designed a custom artwork which I am attaching to this email. The design has been saved and is ready for your review.
+
+📎 ATTACHMENT: My custom design image is included in this email (attached file).
+
+Please confirm receipt of this design and quote, and let me know the next steps for production and delivery.
+
+Thank you!`;
+
+            const subject = `Custom T-Shirt Order - ${designData.size} - ₹${totalPrice.toFixed(2)}`;
+            const mailtoLink = `mailto:main.funkustoms@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Auto-download the image
+            downloadDesignImage();
+            
+            // Show instructions
+            setTimeout(() => {
+                alert('📥 Design image downloaded automatically!\n\n📝 INSTRUCTIONS:\n1. Attach the downloaded design image to the email\n2. Your email client will open in a moment\n3. Paste the image as an attachment\n\nThe email template has been prepared with all your pricing details.');
+
+                window.location.href = mailtoLink;
+            }, 500);
+        }
+
+        // Download design image
+        function downloadDesignImage() {
+            if (!designData.image) {
+                console.error('No design image found');
+                return;
+            }
+
+            const productImage = document.getElementById('productImage');
+            const designCanvas = document.getElementById('designCanvas');
+            const designBorder = document.getElementById('designBorder');
+            const productImageContainer = document.querySelector('.product-image');
+            
+            if (!productImage || !designCanvas || !designBorder || !productImageContainer) {
+                console.error('Missing required elements');
+                alert('Error: Design preview not ready. Please refresh and try again.');
+                return;
+            }
+
+            // Get displayed image dimensions
+            const displayImg = new Image();
+            displayImg.crossOrigin = 'anonymous';
+            
+            displayImg.onload = function() {
+                try {
+                    // Create composite canvas with actual image dimensions
+                    const compositeCanvas = document.createElement('canvas');
+                    const ctx = compositeCanvas.getContext('2d');
+                    
+                    compositeCanvas.width = displayImg.width;
+                    compositeCanvas.height = displayImg.height;
+
+                    // Draw the product image
+                    ctx.drawImage(displayImg, 0, 0);
+
+                    // Get the bounding rectangles
+                    const imgRect = productImage.getBoundingClientRect();
+                    const borderRect = designBorder.getBoundingClientRect();
+
+                    // Calculate scale factor from displayed to actual image size
+                    const scaleX = displayImg.width / imgRect.width;
+                    const scaleY = displayImg.height / imgRect.height;
+
+                    // Calculate position of design relative to the product image element
+                    const relativeX = (borderRect.left - imgRect.left) * scaleX;
+                    const relativeY = (borderRect.top - imgRect.top) * scaleY;
+                    const designWidth = borderRect.width * scaleX;
+                    const designHeight = borderRect.height * scaleY;
+
+                    console.log('Download positioning:', {
+                        imgRect: { left: imgRect.left, top: imgRect.top, width: imgRect.width, height: imgRect.height },
+                        borderRect: { left: borderRect.left, top: borderRect.top, width: borderRect.width, height: borderRect.height },
+                        scale: { x: scaleX, y: scaleY },
+                        final: { x: relativeX, y: relativeY, w: designWidth, h: designHeight }
+                    });
+
+                    // Draw design on composite
+                    ctx.drawImage(designCanvas, Math.round(relativeX), Math.round(relativeY), Math.round(designWidth), Math.round(designHeight));
+
+                    // Download
+                    compositeCanvas.toBlob(function(blob) {
+                        if (!blob) {
+                            console.error('Failed to create blob');
+                            alert('Error: Could not create image. Please try again.');
+                            return;
+                        }
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = `funkustoms-design-${designData.size}-${designData.color.replace('#', '')}-${new Date().getTime()}.png`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                        console.log('Design downloaded successfully');
+                    }, 'image/png');
+                } catch (error) {
+                    console.error('Error creating composite image:', error);
+                    alert('Error: Could not process the image. Please try again.');
+                }
+            };
+            
+            displayImg.onerror = function() {
+                console.error('Failed to load product image:', productImage.src);
+                alert('Error: Could not load the product image.');
+            };
+            
+            displayImg.src = productImage.src;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('uploadArea').addEventListener('click', triggerUpload);
+            
+            // Setup resize handles
+            const handles = ['tl', 'tr', 'bl', 'br'];
+            handles.forEach(handle => {
+                const element = document.getElementById('handle-' + handle);
+                if (element) {
+                    element.addEventListener('mousedown', (e) => startResize(e, handle));
+                }
+            });
+            
+            // Global mouse events for resizing
+            document.addEventListener('mousemove', handleResize);
+            document.addEventListener('mouseup', stopResize);
+            
+            // Design border drag events for positioning within outer canvas
+            const designBorder = document.getElementById('designBorder');
+            if (designBorder) {
+                designBorder.addEventListener('mousedown', startDragDesign);
+                designBorder.addEventListener('touchstart', startDragDesign);
+            }
+            document.addEventListener('mousemove', handleDragDesign);
+            document.addEventListener('touchmove', handleDragDesign);
+            document.addEventListener('mouseup', stopDragDesign);
+            document.addEventListener('touchend', stopDragDesign);
+            
+            // Initial pricing calculation
+            calculatePricing();
+            
+            console.log('Customize page initialized successfully');
+        });
+    </script>
+</body>
+</html>
